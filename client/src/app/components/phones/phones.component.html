@@ -1,0 +1,8 @@
+<div class="container">
+    <mat-card *ngFor="let phone of allPhones | async">
+        <mat-card-title>
+            {{phone.FirstName}} {{phone.LastName}}
+        </mat-card-title>
+    </mat-card>
+
+</div>

@@ -13,22 +13,27 @@ using api;
 
 namespace api.Controllers
 {
-    [EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
+   
+    [RoutePrefix("Phones")]
     public class PersonPhonesController : ApiController
     {
         private Context db = new Context();
 
         // GET: api/PersonPhones
+        [HttpGet]
+        [Route("PersonPhones")]
         public IQueryable<PersonPhone> GetMyEntities()
         {
-            return db.MyEntities;
+            return db.Phones;
         }
 
         // GET: api/PersonPhones/5
+        [HttpGet]
+        [Route("GetPhoneById/{id}")]
         [ResponseType(typeof(PersonPhone))]
         public IHttpActionResult GetPersonPhone(int id)
         {
-            PersonPhone personPhone = db.MyEntities.Find(id);
+            PersonPhone personPhone = db.Phones.Find(id);
             if (personPhone == null)
             {
                 return NotFound();
@@ -38,7 +43,9 @@ namespace api.Controllers
         }
 
         // PUT: api/PersonPhones/5
+
         [ResponseType(typeof(void))]
+        [Route("UpdatePhone/{id}")]
         public IHttpActionResult PutPersonPhone(int id, PersonPhone personPhone)
         {
             if (!ModelState.IsValid)
@@ -73,6 +80,8 @@ namespace api.Controllers
         }
 
         // POST: api/PersonPhones
+        [HttpPost]
+        [Route("CreatePhone")]
         [ResponseType(typeof(PersonPhone))]
         public IHttpActionResult PostPersonPhone(PersonPhone personPhone)
         {
@@ -81,7 +90,7 @@ namespace api.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.MyEntities.Add(personPhone);
+            db.Phones.Add(personPhone);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = personPhone.Id }, personPhone);
@@ -89,15 +98,17 @@ namespace api.Controllers
 
         // DELETE: api/PersonPhones/5
         [ResponseType(typeof(PersonPhone))]
+        [HttpDelete]
+        [Route("DeletePhone/{id}")]
         public IHttpActionResult DeletePersonPhone(int id)
         {
-            PersonPhone personPhone = db.MyEntities.Find(id);
+            PersonPhone personPhone = db.Phones.Find(id);
             if (personPhone == null)
             {
                 return NotFound();
             }
 
-            db.MyEntities.Remove(personPhone);
+            db.Phones.Remove(personPhone);
             db.SaveChanges();
 
             return Ok(personPhone);
@@ -114,7 +125,7 @@ namespace api.Controllers
 
         private bool PersonPhoneExists(int id)
         {
-            return db.MyEntities.Count(e => e.Id == id) > 0;
+            return db.Phones.Count(e => e.Id == id) > 0;
         }
     }
 }
