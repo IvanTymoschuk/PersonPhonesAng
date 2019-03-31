@@ -1,0 +1,19 @@
+.example-header-image {
+  background-size: cover;
+}
+
+.example-card {
+  margin: 10px;
+  width: 400px;
+
+}
+.btn-remove {
+
+  float: right;
+  :hover{
+    cursor: pointer;
+    background-color: gainsboro;
+    color:red;
+    border-radius: 20px;
+  }
+}

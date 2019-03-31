@@ -4,5 +4,7 @@ export class Phone {
     public LastName: string;
     public BirthDate: Date;
     public Phone: string;
+    public AvaPath: string;
+
 }
 
